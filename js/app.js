@@ -1,4 +1,4 @@
-var home = 'https://cdn.rawgit.com/malachai0/pages/gitcafe-pages/README.md'
+var home = 'https://rawgit.com/malachai0/pages/gitcafe-pages/README.md'
 
 var query = location.search.substring('1').split('&')
 var params = {}
