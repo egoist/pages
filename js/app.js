@@ -1,17 +1,16 @@
-var home = 'https://rawgit.com/malachai0/pages/gitcafe-pages/README.md'
-
-var query = location.search.substring('1').split('&')
-var params = {}
-for (var i in query) {
-  var key = query[i].split('=')[0],
-    value = query[i].split('=')[1]
-  params[key] = value
-}
-
-var url = params.url || location.hash.substring(2) || home
-url = (url.indexOf('://') == -1) ? 'http://' + url : url
-
 var fn = function() {
+  var home = 'https://rawgit.com/malachai0/pages/gitcafe-pages/README.md'
+
+  var query = location.search.substring('1').split('&')
+  var params = {}
+  for (var i in query) {
+    var key = query[i].split('=')[0],
+      value = query[i].split('=')[1]
+    params[key] = value
+  }
+
+  var url = params.url || location.hash.substring(2) || home
+  url = (url.indexOf('://') == -1) ? 'http://' + url : url
   qwest.get(url).then(function(data) {
     var $content = document.getElementById('content')
     if (!data) {
@@ -19,9 +18,13 @@ var fn = function() {
     }
     var html = marked(data);
     var title = strip_tags(html.split('\n')[0])
-   $content.innerHTML = html;
+    $content.innerHTML = html;
     document.title = title
   })
+}
+
+window.onhashchange = function() {
+  fn()
 }
 
 ;(function(fn) {
